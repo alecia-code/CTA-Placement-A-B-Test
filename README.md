@@ -1,36 +1,30 @@
-# 🧪 CTA Placement A/B Test – Productivity App
+# CTA Placement A B Test
 
-This A/B test simulates how CTA button placement affects user engagement and conversion for a productivity tool like Google Calendar or Calendly. Users were randomly assigned to two groups:
-- **Inline CTA**: Button shown after time selection
-- **Floating CTA**: Always-visible floating action button
+**Portfolio case study | Synthetic data | Python, pandas, Streamlit, Plotly**
 
-## 📊 Features
-- KPI Cards: CTR, Conversion Rate, Revenue per Session, Avg Scroll Depth
-- Filters: Device Type, Variant Group
-- Visuals:
-  - CTR by Variant
-  - Conversion Rate by Variant & Device
-  - Revenue Distribution by Variant
-  - Session Engagement: Scroll vs Duration
+## Business question
+Compare simulated CTA placement variants across conversion, engagement, and revenue per session.
 
-## 🧪 Use Cases
-- Compare button visibility impacts on CTR and conversion
-- Measure scroll & hover as proxy for intent
-- Tie test results to business KPIs like revenue and conversion lift
+## Analyst approach
+1. Define the operational decision and measurable KPIs.
+2. Segment the simulated records using dashboard controls.
+3. Compare trends and flag exceptions for investigation.
+4. Check metric definitions and filter consistency before presenting findings.
 
-## 🛠 Tools Used
-- Python
-- Streamlit
-- Pandas
-- Plotly
+## Dashboard and metrics
+The Streamlit app provides interactive filters, KPI summaries, and charts. Run it locally to explore how the selected segments change the results. The data is **synthetic**: findings are demonstrations of analytical methods, not observed customer outcomes.
 
-## 🚀 How to Run
-1. Clone this repo
-2. Install requirements: `pip install -r requirements.txt`
-3. Run: `streamlit run app.py`
+## Quality assurance and interpretation
+All charts use the same sidebar-filtered dataset. Descriptive differences do not establish statistical significance or causal lift without assignment checks and an inferential test.
 
-## 📁 Files
-- `app.py`: Streamlit dashboard
-- `cta_placement_test_data.csv`: Simulated test data
-- `requirements.txt`: Dependencies
-- `cta_case_study.docx`: Case study summary
+**Validation checklist:** confirm the dataset loads; verify KPI numerators/denominators against pandas calculations; test each filter alone and combined; check zero-row and zero-denominator selections; confirm every chart responds to the same filtered dataset; review charts for misleading causal claims.
+
+## Tools and reproduction
+```bash
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+The CSV in this repository is simulated sample data. The original case-study document is retained as a supplemental artifact; this README documents the current analytical approach.
+
+## What this demonstrates
+Business problem framing, KPI design, data exploration, operational reporting, dashboard development, and analytical QA. This is an independent portfolio exercise, not a client engagement or production deployment.
