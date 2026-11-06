@@ -25,26 +25,26 @@ col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Sessions", f"{filtered.shape[0]:,}")
 col2.metric("CTR", f"{filtered['cta_clicked'].mean()*100:.2f}%" if filtered.shape[0] else "0%")
 col3.metric("Conversion Rate", f"{filtered['converted'].mean()*100:.2f}%" if filtered.shape[0] else "0%")
-col4.metric("Revenue / Session", f"${filtered['revenue'].mean():.2f}")
-col5.metric("Avg Scroll Depth", f"{filtered['scroll_depth_pct'].mean()*100:.1f}%")
+col4.metric("Revenue / Session", f"${filtered['revenue'].mean():.2f}" if len(filtered) else "N/A")
+col5.metric("Avg Scroll Depth", f"{filtered['scroll_depth_pct'].mean()*100:.1f}%" if len(filtered) else "N/A")
 
 # CTR by Variant
 st.subheader("📊 Click-Through Rate by Variant")
-ctr_variant = df.groupby("variant_group")["cta_clicked"].mean().reset_index()
+ctr_variant = filtered.groupby("variant_group")["cta_clicked"].mean().reset_index()
 ctr_fig = px.bar(ctr_variant, x="variant_group", y="cta_clicked",
                  labels={"cta_clicked": "CTR"}, title="CTR by Variant")
 st.plotly_chart(ctr_fig, use_container_width=True)
 
 # Conversion by Variant & Device
 st.subheader("📈 Conversion Rate by Variant & Device")
-conversion_fig = px.bar(df.groupby(["variant_group", "device_type"])["converted"].mean().reset_index(),
+conversion_fig = px.bar(filtered.groupby(["variant_group", "device_type"])["converted"].mean().reset_index(),
                         x="variant_group", y="converted", color="device_type", barmode="group",
                         labels={"converted": "Conversion Rate"}, title="Conversion by Variant & Device")
 st.plotly_chart(conversion_fig, use_container_width=True)
 
 # Revenue by Group
 st.subheader("💰 Revenue Per Session by Variant")
-revenue_fig = px.box(df, x="variant_group", y="revenue", color="variant_group",
+revenue_fig = px.box(filtered, x="variant_group", y="revenue", color="variant_group",
                      title="Revenue Distribution by Variant")
 st.plotly_chart(revenue_fig, use_container_width=True)
 
